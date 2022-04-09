@@ -28,3 +28,11 @@ To execute the default code, simply stand on the main directory and run:
   cd SentimentAnalalysis
   python sentiment_analysis.py
 ```
+
+## Running Data Analaysis code
+### Requirements
+- The R runtime must be installed on your system ([RStudio is recommended](https://www.rstudio.com/products/rstudio/download/))
+- You must modify the `main.R` file to include the correct path to the data files.
+### Running
+
+To execute the default code, enter the `DataAnalysis` directory, run the `requirements.R` script to install necessary dependencies, and finally run the `main.R` script.
