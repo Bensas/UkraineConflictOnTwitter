@@ -1,29 +1,8 @@
+import { searchTweets } from './api.ts';
+import { saveTweetsToCSV } from './file_utils.ts';
 const ACCESS_TOKEN = '';
 
-
-// const endpointURL = 'https://api.twitter.com/labs/2/tweets';
-const userEndpointURL = 'https://api.twitter.com/2/users/by/username/';
-const searchEndpointURL = 'https://api.twitter.com/2/tweets/search/recent';
-const searchArchiveEndpointURL = 'https://api.twitter.com/2/tweets/search/all';
-
-async function getUserTweets(user: string) {
-
-  const response = await fetch(userEndpointURL + user, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer ' + ACCESS_TOKEN
-    },
-  });
-  const respBody = await response.json();
-	console.log('userResponse', respBody);
-
-}
-
-// getUserTweets('FoxNews');
-
 var yesterday = new Date('07 April 2022 14:48 UTC');
-
 const testSearchParams = {
   query: 'Ukraine',
   end_time: yesterday.toISOString(),
@@ -31,43 +10,8 @@ const testSearchParams = {
   max_results: 10
 }
 
-async function searchTweets(params: any) {
-  const response = await fetch(searchEndpointURL + '?' +  new URLSearchParams(params),
-    {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer ' + ACCESS_TOKEN
-    },
-  });
-  const respBody = await response.json();
-	console.log('userResponse', respBody);
-  console.log('userResponse', respBody.data[1].text);
-  return respBody;
-}
-
-
-async function writeToFile(object: any, filePath: string) {
-  await Deno.writeTextFile(filePath, JSON.stringify(object));
-  console.log('File written to ' + filePath);
-}
-
-async function saveTweetsToCSV(tweets: any, filePath: string) {
-  let result: string = '';
-  Object.keys(tweets.data[0]).forEach((key, index, arr) => result += key + (index != arr.length-1) ? ', ' : '');
-  result += '\n';
-  tweets.data.forEach((tweetData: any) => {
-    Object.keys(tweetData).forEach((key, index, arr) => {
-      result += tweetData[key].replace(/\n/g, "\\n") + (index != arr.length-1) ? ', ' : '';
-    })
-    result += '\n';
-  });
-  await Deno.writeTextFile(filePath, result);
-}
-
-
 async function main() {
-  // const tweets = await searchTweets(testSearchParams);
+  // const tweets = await searchTweets(testSearchParams, ACCESS_TOKEN);
   const tweets = {
     data: [
       {
