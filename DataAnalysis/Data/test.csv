@@ -1,0 +1,10 @@
+"","userid","username","acctdesc","location","following","followers","totaltweets","usercreatedts","tweetid","tweetcreatedts","retweetcount","text","hashtags","language","coordinates","favorite_count","extractedts", "sentiment"
+"1141800","1466752038960656385","Curtin2Tiffany","I am just like everyone else.  The universe experiencing itself.","Colorado, USA","253","40","94","2021-12-03 12:52:22.000000","1497724980259262467","2022-02-27 00:07:16","5","#UkraineRussiaWar Captured Russian soldiers
+
+""They said what their own battalion, where they are from and then told him it was just training and did not know they are in ukraine.""
+#RussianArmy #Soldiers #Україна #Ukraine #UkraineRussiaWar https://t.co/KVIPqs7TzJ https://t.co/LdlzDnxCzG","[{'text': 'UkraineRussiaWar', 'indices': [19, 36]}]","en","","0","2022-02-27 00:09:33.084131", "positive"
+"1141801","1111276809302216710","5ela60","الأب ..الأخ ..الجار ..الحبيب .. السديك","","167","9","656","2019-03-28 14:40:12.000000","1497724980271984641","2022-02-27 00:07:16","28","Like everybody else I am rooting for Ukraine to fight off Russia, but seeing this video is truly sad. These soldiers are clueless and lost and are forced to fight for a corrupted dictator that is Vladimir Putin. They don’t want this. #UkraineRussiaWar #UkraineUnderAttack #Ukrania https://t.co/IckHqDBbQC","[]","en","","0","2022-02-27 00:09:33.068011", "negative"
+"1141802","1364735420236505088","StatistWomen","🇹🇷","Cumhur İttifakı","1771","1766","37009","2021-02-25 00:35:28.000000","1497724980322349058","2022-02-27 00:07:16","3","#Ukrayna Güvenlik Servisi, #Rus finosu #Kadirov'un konvoyunun Gostomel yakınlarında imha edildiğini bildirdi.
+
+#SİHA Reis'e rastlamışlar.. :)
+#UkraineRussiaWar","[{'text': 'Ukrayna', 'indices': [15, 23]}, {'text': 'Rus', 'indices': [42, 46]}, {'text': 'Kadirov', 'indices': [54, 62]}, {'text': 'SİHA', 'indices': [126, 131]}]","tr","","0","2022-02-27 00:09:33.059979", "negative"
