@@ -1,0 +1,5 @@
+// Alternative tweet dataset https://www.kaggle.com/code/stpeteishii/tweets-on-ukraine-crisis/data?select=UkraineCombinedTweetsDeduped_MAR04.csv.gzip
+// BEARER_TOKEN = AAAAAAAAAAAAAAAAAAAAAF6cbAEAAAAADjcGmbZMZXWE1T2s70thj9dn6lI%3Dft6aMqFE1NNOruShZanLa8jVidpCYAmrKPWM6EK653UsGHvbdM
+
+// ACCESS_TOKEN = 276762606-RILHwrneWyVq410cFSaiotb4ITLzPX4H2tvJgMIx
+// ACCESS_TOKEN_SECRET = ZBBFPFvtQYml2onRYAv2wsulwnL3XNO9xDgX81ATHzB8C
