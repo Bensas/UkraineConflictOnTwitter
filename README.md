@@ -21,6 +21,8 @@ To execute the default code, simply stand on the main directory and run:
 
 - You must have the `tensorflow` library installed. Can be installed running `pip install -q tensorflow`
 
+- You must have the `pytorch` library installed. Can be installed running `pip install -q torch`
+
 ### Running
 
 To execute the default code, simply stand on the main directory and run:
