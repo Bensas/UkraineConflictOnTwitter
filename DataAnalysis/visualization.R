@@ -27,8 +27,10 @@ plot_piechart <- function(data, title) {
     #theme(legend.position="none") +
     #geom_text(aes(y = ypos, label = label), color = "white", size=6) +
     scale_fill_manual('label', values=label_colours)
-  
-  # Q1 visualization
+}
+
+# Q1 visualization
+plot_time_stacked_barchart <- function(sentiment_by_week) {
   ggplot(sentiment_by_week, aes(fill=label, y=freq, x=week)) + 
   geom_bar(position='stack', stat='identity') +
   theme_minimal() + 
@@ -39,8 +41,8 @@ plot_piechart <- function(data, title) {
   theme(axis.title.y = element_text(face='bold', size=15, margin = margin(t = 0, b = 0, r = 10, l = 10))) +
   theme(axis.text.x = element_text(angle=30, size=13)) +
   theme(axis.text.y = element_text(size=13)) +
-  theme(legend.title = element_text(face='bold', size=15)) +
-  theme(legend.text = element_text(size=15)) +
+  theme(legend.title = element_text(face='bold', size=legend_title_size)) +
+  theme(legend.text = element_text(size=legend_text_size)) +
   scale_x_continuous(breaks=c(1,3,7,11,15,19), labels=c("Dec 2021", "Jan 2022", "Feb 2022", "March 2022", "April 2022", "May 2022")) +
-  scale_fill_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c'))
+  scale_fill_manual('label', values=label_colours)
 }
