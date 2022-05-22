@@ -46,11 +46,11 @@ trigram_wc <- function(foxnews){
   return(wc)
 }
 
-fox_pos <- foxnews %>% filter(label=="Positive")
-fox_neg <- foxnews %>% filter(label=="Negative")
-fox_neu <- foxnews %>% filter(label=="Neutral")
+fox_pos <- trigram_wc(foxnews %>% filter(label=="Positive"))
+fox_neg <- trigram_wc(foxnews %>% filter(label=="Negative"))
+fox_neu <- trigram_wc(foxnews %>% filter(label=="Neutral"))
 
-nyt_pos <- nytimes %>% filter(label=="Positive")
-nyt_neg <- nytimes %>% filter(label=="Negative")
-nyt_neu <- nytimes %>% filter(label=="Neutral")
+nyt_pos <- trigram_wc(nytimes %>% filter(label=="Positive"))
+nyt_neg <- trigram_wc(nytimes %>% filter(label=="Negative"))
+nyt_neu <- trigram_wc(nytimes %>% filter(label=="Neutral"))
 

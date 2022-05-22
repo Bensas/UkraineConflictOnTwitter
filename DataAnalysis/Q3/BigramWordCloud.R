@@ -18,6 +18,7 @@ foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Met
 nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
 
 bigram_wc <- function(foxnews){
+  foxnews$text <- removeNumbers(foxnews$text)
   fox_unn <- foxnews %>% unnest_tokens(word, text, token = "ngrams",
                                        n=2) %>% 
     anti_join(stop_words)
@@ -44,12 +45,12 @@ bigram_wc <- function(foxnews){
   return(wc)
 }
 
-fox_pos <- foxnews %>% filter(label=="Positive")
-fox_neg <- foxnews %>% filter(label=="Negative")
-fox_neu <- foxnews %>% filter(label=="Neutral")
+fox_pos <- bigram_wc(foxnews %>% filter(label=="Positive"))
+fox_neg <- bigram_wc(foxnews %>% filter(label=="Negative"))
+fox_neu <- bigram_wc(foxnews %>% filter(label=="Neutral"))
 
-nyt_pos <- nytimes %>% filter(label=="Positive")
-nyt_neg <- nytimes %>% filter(label=="Negative")
-nyt_neu <- nytimes %>% filter(label=="Neutral")
+nyt_pos <- bigram_wc(nytimes %>% filter(label=="Positive"))
+nyt_neg <- bigram_wc(nytimes %>% filter(label=="Negative"))
+nyt_neu <- bigram_wc(nytimes %>% filter(label=="Neutral"))
 
 
