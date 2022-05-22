@@ -12,7 +12,7 @@ foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Met
 nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
 
 make_cloud <- function(dataset, sentiment){
-  positive <- fox_cloud[fox_cloud$label == sentiment,] 
+  positive <- dataset[dataset$label == sentiment,] 
   
   # remove non-ascii words
   positive$text <- stringi::stri_trans_general(positive$text, "latin-ascii")
@@ -43,3 +43,4 @@ make_cloud <- function(dataset, sentiment){
 }
 
 make_cloud(foxnews, "Neutral")
+

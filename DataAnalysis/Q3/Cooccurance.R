@@ -14,6 +14,15 @@ foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Meth
 nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/new_york_times_Final_with_sentiment.csv")
 foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/FoxNews_Sheikh_with_sentiment.csv")
 nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
+####pre-processing#####
+nytimes <- nytimes %>% select(Date, text, label, score)
+nytimes$Date <- sub(" .*", "", nytimes$Date) %>% as.Date(format="%Y-%m-%d", tz="UTC")
+nytimes$text <- tolower(nytimes$text)
+
+foxnews <- foxnews %>% select(Date, text, label, score)
+foxnews$Date <- sub(" .*", "", foxnews$Date) %>% as.Date(format="%Y-%m-%d", tz="UTC")
+foxnews$text <- tolower(foxnews$text)
+##########
 
 coocc_func <- function(foxnews){
   fox_unn <- foxnews %>% unnest_tokens(word, text, token = "ngrams",
@@ -42,6 +51,8 @@ nyt_pos <- nytimes %>% filter(label=="Positive")
 nyt_neg <- nytimes %>% filter(label=="Negative")
 nyt_neu <- nytimes %>% filter(label=="Neutral")
 
+int_point <- foxnews %>% filter(Date > "2022-01-05")
+int_point <- int_point %>% filter(Date < "2022-01-20")
 type(coocc_func(foxnews))
 df <- coocc_func(nytimes)
 df$bigram <- paste(df$word1, df$word2, sep=" ")

@@ -1,3 +1,5 @@
+#This file is a mess. I only used this to make the graphs
+
 #Research Question 3
 library(pacman) #my package manager
 
@@ -87,6 +89,7 @@ ggplot(sentiment_by_week_combined, aes(fill=source, y=freq, x=Week)) +
 
 
 ####Checking the overall sentiment of the news
+
 foxTotal <- table(foxnews$label)/length(foxnews$label) * 100
 nyTotal <- table(nytimes$label)/length(nytimes$label) * 100
 
@@ -107,9 +110,6 @@ ggplot(nyTotal, aes(x="", y=Percentage, fill=Sentiment)) +
   theme(panel.background = element_blank())
   
 
-gfox1
-gnyt1
-
 #barplot
 gfox2 <- ggplot(foxTotal, aes(x=Sentiment, y=Percentage, fill=Sentiment)) +
   geom_bar(stat="identity", width = 1, color="white") +
@@ -127,6 +127,8 @@ ggplot(allSent, aes(x=Sentiment, y=Percentage, fill=Source)) +
   theme(panel.background = element_blank()) +
   ggtitle("Media Outlet Tweet and Reply Sentiment Comparison") +
   scale_fill_manual(values=c("#fc4949", "#1a94eb"))
+
+###############################################################################
 
 
 

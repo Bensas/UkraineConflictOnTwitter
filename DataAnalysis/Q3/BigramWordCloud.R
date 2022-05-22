@@ -52,7 +52,4 @@ nyt_pos <- nytimes %>% filter(label=="Positive")
 nyt_neg <- nytimes %>% filter(label=="Negative")
 nyt_neu <- nytimes %>% filter(label=="Neutral")
 
-type(coocc_func(foxnews))
-df <- coocc_func(nytimes)
-df$bigram <- paste(df$word1, df$word2, sep=" ")
-head(df)
+filter_by_date <- 
