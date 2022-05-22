@@ -1,9 +1,14 @@
 # Q1 wordcloud
+library(pacman)
+p_load(wordcloud)
+p_load(tm)
+p_load(dplyr)
+p_load(ggplot2)
 
 # source file -- change the file path here
 fox_cloud <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/fox_news_Final_with_sentiment.csv")
 
-positive <- fox_cloud[fox_cloud$label == 'Neutral',] 
+positive <- fox_cloud[fox_cloud$label == 'Positive',] 
 
 # remove non-ascii words
 positive$text <- stringi::stri_trans_general(positive$text, "latin-ascii")
@@ -17,7 +22,7 @@ docs <- docs %>%
   tm_map(stripWhitespace)
 docs <- tm_map(docs, content_transformer(tolower))
 docs <- tm_map(docs, removeWords, stopwords("english"))
-docs <- tm_map(docs, removeWords, c("russia", "ukraine", "user")) # remove "Russia" and "Ukraine"
+docs <- tm_map(docs, removeWords, c("russia", "ukraine", "user", "http")) # remove "Russia" and "Ukraine"
 
 # create matrix
 dtm <- TermDocumentMatrix(docs) 

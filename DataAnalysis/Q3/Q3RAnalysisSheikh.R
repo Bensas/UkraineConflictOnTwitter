@@ -8,9 +8,10 @@ p_load(reshape2)
 p_load(gridExtra)
 p_load(stringr)
 #reading data
-foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/FoxNews_Sheikh_with_sentiment.csv")
-nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
-
+foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/fox_news_Final_with_sentiment.csv")
+nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/new_york_times_Final_with_sentiment.csv")
+foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/FoxNews_Sheikh_with_sentiment.csv")
+nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
 #######3#preprocess everything
 
 nytimes <- nytimes %>% select(Date, text, label, score)
@@ -22,7 +23,6 @@ foxnews$Date <- sub(" .*", "", foxnews$Date) %>% as.Date(format="%Y-%m-%d", tz="
 foxnews$text <- tolower(foxnews$text)
 
 #########Copied these codes from Juan's code##########
-
 
 # create YearMonth column
 foxnews$YearMonth <- substr(foxnews$Date, 1,7)
@@ -92,16 +92,18 @@ foxTotal <- melt(foxTotal) %>% rename(c(Sentiment = Var1, Percentage=value)) %>%
 nyTotal <- melt(nyTotal) %>% rename(c(Sentiment = Var1, Percentage=value)) %>% mutate(Source="NYT")
 allSent <- rbind(foxTotal, nyTotal)
 
-gfox1 <- ggplot(foxTotal, aes(x="", y=Percentage, fill=Sentiment)) +
+ggplot(foxTotal, aes(x="", y=Percentage, fill=Sentiment)) +
   geom_bar(stat="identity", width = 1, color="white") +
   coord_polar("y", start = 0) +
-  theme(legend.position="none", panel.background = element_blank()) 
-  
+  ggtitle("Fox News Tweets and Replies' Sentiment") +
+  theme(panel.background = element_blank())
 
-gnyt1 <- ggplot(nyTotal, aes(x="", y=Percentage, fill=Sentiment)) +
+ggplot(nyTotal, aes(x="", y=Percentage, fill=Sentiment)) +
   geom_bar(stat="identity", width = 1, color="white") +
   coord_polar("y", start = 0) +
-  theme_void() 
+  ggtitle("NYT Tweets and Replies' Sentiment") +
+  theme(panel.background = element_blank())
+  
 
 gfox1
 gnyt1
@@ -121,43 +123,10 @@ gnyt2 <- ggplot(nyTotal, aes(x=Sentiment, y=Percentage, fill=Sentiment)) +
 ggplot(allSent, aes(x=Sentiment, y=Percentage, fill=Source)) +
   geom_bar(stat="identity", width = 1, position = position_dodge()) +
   theme(panel.background = element_blank()) +
+  ggtitle("Media Outlet Tweet and Reply Sentiment Comparison") +
   scale_fill_manual(values=c("#fc4949", "#1a94eb"))
 
 
-
-############## Filtering out war related tweets####################
-#we look for the following words
-warwords <- c("invasion", "ukraine", "russia", "war", "putin", "zelensky", "nato", "eu", "invade")
-
-warTweet <- function(text) {
-  word = unlist(strsplit(text, " "))[1]
-  if (word %in% warwords) {
-    TRUE
-  } else{
-    FALSE
-  } 
-}
-warfox <- foxnews %>% filter(sapply(foxnews$text, warTweet))
-warnyt <- nytimes %>% filter(sapply(nytimes$text, warTweet))
-
-######Plotting similar graph for war tweets:
-foxTotal2 <- table(warfox$label)/length(warfox$label) * 100
-nyTotal2 <- table(warnyt$label)/length(warnyt$label) * 100
-#positive and negative newstitles
-foxTotal2 <- melt(foxTotal2) %>% rename(c(Sentiment = Var1, Percentage=value)) %>% mutate(Source="FoxNews")
-nyTotal2 <- melt(nyTotal2) %>% rename(c(Sentiment = Var1, Percentage=value)) %>% mutate(Source="NYT")
-allSent2 <- rbind(foxTotal2, nyTotal2)
-ggplot(allSent2, aes(x=Sentiment, y=Percentage, fill=Source)) +
-  geom_bar(stat="identity", width = 1, position = position_dodge()) +
-  theme(panel.background = element_blank()) +
-  scale_fill_manual(values=c("#fc4949", "#1a94eb"))
-
-#to check the size of the dataframes. unfortunately they are quite small
-dim(warfox)
-dim(warnyt)
-
-#########Plotting the time series of sentiment########
-ggplot(foxnews, aes(x=Date, y=label)) + geom_line()
 
 
 
