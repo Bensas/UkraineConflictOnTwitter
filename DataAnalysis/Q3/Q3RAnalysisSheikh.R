@@ -10,7 +10,8 @@ p_load(stringr)
 #reading data
 foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/FoxNews_Sheikh_with_sentiment.csv")
 nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
-#preprocess everything
+
+#######3#preprocess everything
 
 nytimes <- nytimes %>% select(Date, text, label, score)
 nytimes$Date <- substr(nytimes$Date, 0, 10) %>% as.Date("%Y-%m-%d")
@@ -19,11 +20,39 @@ nytimes$text <- tolower(nytimes$text)
 foxnews <- foxnews %>% select(Date, text, label, score)
 foxnews$Date <- substr(foxnews$Date, 0, 10) %>% as.Date("%Y-%m-%d")
 foxnews$text <- tolower(foxnews$text)
+#########Copied these codes from Juan
+# convert string to datetime
+q1$Date <- sub(" .*", "", q1$Date)
+q1$Date <- as.Date(q1$Date, format="%Y-%m-%d", tz="UTC")
+
+# create YearMonth column
+q1$YearMonth <- substr(q1$Date, 1,7)
+
+# create Week column
+q1 <- q1 %>% 
+  mutate(Week = cut.Date(q1$Date, breaks = "1 week", labels = FALSE)) %>% 
+  arrange(q1$Date)
+
+# calculate percentage of sentiment by week
+sentiment_by_week <- q1 %>%
+  group_by(Week, label) %>%
+  summarise(cnt = n()) %>%
+  mutate(freq = round(cnt / sum(cnt), 3)) %>% 
+  arrange(Week)
+
+# calculate percentage of sentiment by month
+sentiment_by_month <- q1 %>%
+  group_by(YearMonth, label) %>%
+  summarise(cnt = n()) %>%
+  mutate(freq = round(cnt / sum(cnt), 3)) %>% 
+  arrange(YearMonth)
 
 
+
+####Checking the overall positivity of the news
 foxTotal <- table(foxnews$label)/length(foxnews$label) * 100
 nyTotal <- table(nytimes$label)/length(nytimes$label) * 100
-#Overall positive and negative news
+
 foxTotal <- melt(foxTotal) %>% rename(c(Sentiment = Var1, Percentage=value)) %>% mutate(Source="FoxNews")
 nyTotal <- melt(nyTotal) %>% rename(c(Sentiment = Var1, Percentage=value)) %>% mutate(Source="NYT")
 allSent <- rbind(foxTotal, nyTotal)
@@ -88,5 +117,13 @@ ggplot(allSent2, aes(x=Sentiment, y=Percentage, fill=Source)) +
   theme(panel.background = element_blank()) +
   scale_fill_manual(values=c("#fc4949", "#1a94eb"))
 
+#to check the size of the dataframes. unfortunately they are quite small
 dim(warfox)
 dim(warnyt)
+
+#########Plotting the time series of sentiment########
+ggplot(foxnews, aes(x=Date, y=label)) + geom_line()
+
+
+
+
