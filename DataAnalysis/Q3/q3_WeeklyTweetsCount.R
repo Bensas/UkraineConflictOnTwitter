@@ -59,5 +59,5 @@ ggplot() +
   theme(legend.text = element_text(size=15)) +
   geom_line(aes(x = Week, y = cnt, color = "Fox News"), data = foxnews_by_week, size=1.5) + 
   geom_line(aes(x = Week, y = cnt, color = "NY Times"), data = nytimes_by_week, size=1.5) +
-  scale_color_manual(name = "Y series", values = c("Fox News" = "#d9534f", "NY Times" = "#5cb85c")) + 
+  scale_color_manual(name = "Y series", values = c("Fox News" = "#d9534f", "NY Times" = "#0275d8")) + 
   scale_x_continuous(breaks=c(1,4,11,16,23), labels=c("Dec 24th", "Jan 14th", "Feb 24th", "April 7th", "May 24th")) 
