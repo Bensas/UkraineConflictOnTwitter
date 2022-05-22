@@ -42,5 +42,5 @@ make_cloud <- function(dataset, sentiment){
 
 }
 
-make_cloud(foxnews, "Neutral")
+make_cloud(foxnews, "Negative")
 

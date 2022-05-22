@@ -17,19 +17,21 @@ nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Meth
 foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/FoxNews_Sheikh_with_sentiment.csv")
 nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/NYT_Sheikh_with_sentiment.csv")
 
-bigram_wc <- function(foxnews){
+trigram_wc <- function(foxnews){
   fox_unn <- foxnews %>% unnest_tokens(word, text, token = "ngrams",
-                                       n=2) %>% 
+                                       n=3) %>% 
     anti_join(stop_words)
   bg_fox <- fox_unn %>% 
-    separate(word, c("word1", "word2"), sep=" ")
+    separate(word, c("word1", "word2", "word3"), sep=" ")
   
-  avoid_list <- c("russia", "ukraine", "user", "http", "fox", "york", "tucker")
+  avoid_list <- c("russia", "ukraine", "user", "http", "fox", "york")
   filter_bg_fox <- bg_fox %>% 
     filter(!word1 %in% stop_words$word) %>% 
-    filter(!word2 %in% stop_words$word) %>% 
+    filter(!word2 %in% stop_words$word) %>%
+    filter(!word3 %in% stop_words$word) %>% 
     filter(!word1 %in% avoid_list) %>% 
-    filter(!word2 %in% avoid_list)
+    filter(!word2 %in% avoid_list) %>% 
+    filter(!word3 %in% avoid_list)
   
   count_bg <- filter_bg_fox %>% 
     group_by(word1, word2) %>% 
@@ -51,5 +53,4 @@ fox_neu <- foxnews %>% filter(label=="Neutral")
 nyt_pos <- nytimes %>% filter(label=="Positive")
 nyt_neg <- nytimes %>% filter(label=="Negative")
 nyt_neu <- nytimes %>% filter(label=="Neutral")
-
 

@@ -126,6 +126,9 @@ ggplot(allSent, aes(x=Sentiment, y=Percentage, fill=Source)) +
   geom_bar(stat="identity", width = 1, position = position_dodge()) +
   theme(panel.background = element_blank()) +
   ggtitle("Media Outlet Tweet and Reply Sentiment Comparison") +
+  theme(plot.title = element_text(hjust = 0.5, size=15, face='bold', margin = margin(t = 10, r = 0 , b = 10, l = 0))) +
+  theme(axis.title.x = element_text(face='bold', size=12, margin = margin(t = 10, b = 10, r = 0, l = 0))) +
+  theme(axis.title.y = element_text(face='bold', size=12, margin = margin(t = 0, b = 0, r = 10, l = 10))) +
   scale_fill_manual(values=c("#fc4949", "#1a94eb"))
 
 ###############################################################################

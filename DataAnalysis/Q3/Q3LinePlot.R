@@ -43,7 +43,7 @@ ggplot(sentiment_by_week, aes(fill=label, y=freq, x=Week, col=label)) +
   geom_line(lwd=1.5) +
   theme_minimal() + 
   theme(panel.background = element_blank()) +
-  ggtitle("NY Times Average Emotions of Tweets by Week") +
+  ggtitle("Fox News Average Sentiment of Tweets by Week") +
   labs(x='Week', y='Frequency') +
   theme(plot.title = element_text(hjust = 0.5, size=15, face='bold', margin = margin(t = 10, r = 0 , b = 10, l = 0))) +
   theme(axis.title.x = element_text(face='bold', size=10, margin = margin(t = 10, b = 10, r = 0, l = 0))) +
@@ -52,6 +52,6 @@ ggplot(sentiment_by_week, aes(fill=label, y=freq, x=Week, col=label)) +
   theme(axis.text.y = element_text(size=10)) +
   theme(legend.title = element_text(face='bold', size=10)) +
   theme(legend.text = element_text(size=8)) +
-  scale_x_continuous(breaks=c(1,11,16,23), labels=c("Dec 24th", "Feb 24th", "April 7th", "May 24th"))
+  scale_x_continuous(breaks=c(1,12,19,23), labels=c("Dec 1st", "Feb 24th", "April 12th", "April 30th"))
 #scale_color_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c', '#5cb86c', '#5cb87c', '#5cb88c', '#5cb89c'))
 
