@@ -29,12 +29,12 @@ plot_piechart <- function(data, title) {
     scale_fill_manual('label', values=label_colours)
 }
 
-# Q1 visualization
-plot_time_stacked_barchart <- function(sentiment_by_week) {
-  ggplot(sentiment_by_week, aes(fill=label, y=freq, x=week)) + 
+# Stacked Bar Chart
+plot_time_stacked_barchart <- function(data, title) {
+  ggplot(data, aes(fill=label, y=freq, x=week)) + 
   geom_bar(position='stack', stat='identity') +
   theme_minimal() + 
-  ggtitle("Average Sentiment of Tweets by Week") +
+  ggtitle(title) +
   labs(x='Week', y='Frequency') +
   theme(plot.title = element_text(hjust = 0.5, size=20, face='bold', margin = margin(t = 10, r = 0 , b = 10, l = 0))) +
   theme(axis.title.x = element_text(face='bold', size=15, margin = margin(t = 10, b = 10, r = 0, l = 0))) +
@@ -43,6 +43,5 @@ plot_time_stacked_barchart <- function(sentiment_by_week) {
   theme(axis.text.y = element_text(size=13)) +
   theme(legend.title = element_text(face='bold', size=legend_title_size)) +
   theme(legend.text = element_text(size=legend_text_size)) +
-  scale_x_continuous(breaks=c(1,3,7,11,15,19), labels=c("Dec 2021", "Jan 2022", "Feb 2022", "March 2022", "April 2022", "May 2022")) +
   scale_fill_manual('label', values=label_colours)
 }
