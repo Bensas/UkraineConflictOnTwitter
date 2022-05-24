@@ -11,12 +11,12 @@ library(stringi)
 q2_zelensky <-  read.csv('/Users/Bensas/ITBA/Intercambios/KAIST/Data\ Science\ Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q2/putin_russian_with_sentiment.csv')
 
 # convert string to datetime
-q2_zelensky$tweetcreatedts <- sub(" .*", "", q2_zelensky$tweetcreatedts)
-q2_zelensky$tweetcreatedts <- as.Date(q2_zelensky$tweetcreatedts, format="%Y-%m-%d", tz="UTC")
+q2_zelensky$Date <- sub(" .*", "", q2_zelensky$Date)
+q2_zelensky$Date <- as.Date(q2_zelensky$Date, format="%Y-%m-%d", tz="UTC")
 
 # Tweets before twitter ban
-q2_zelensky_before_ban <- subset(q2_zelensky, tweetcreatedts < as.Date('2022-03-04'))
-q2_zelensky_after_ban <- subset(q2_zelensky, tweetcreatedts >= as.Date('2022-03-04'))
+q2_zelensky_before_ban <- subset(q2_zelensky, Date < as.Date('2022-03-04'))
+q2_zelensky_after_ban <- subset(q2_zelensky, Date >= as.Date('2022-03-04'))
 
 # calculate percentage of label
 sentiment_before_ban <- q2_zelensky_before_ban %>%
