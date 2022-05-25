@@ -52,7 +52,7 @@ ggplot(sentiment_by_week, aes(fill=label, y=freq, x=Week)) +
   theme(axis.text.y = element_text(size=13)) +
   theme(legend.title = element_text(face='bold', size=15)) +
   theme(legend.text = element_text(size=15)) +
-  scale_x_continuous(breaks=c(1,5,23), labels=c("Dec 24th", "Feb 24th", "May 24th")) +
+  scale_x_continuous(breaks=c(1,11,16,23), labels=c("Dec 24th", "Feb 24th", "April 7th", "May 24th")) +
   scale_fill_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c'))
 
 # graph (by month)
@@ -70,37 +70,3 @@ ggplot(sentiment_by_month, aes(fill=label, y=freq, x=YearMonth)) +
   theme(legend.title = element_text(face='bold', size=15)) +
   theme(legend.text = element_text(size=15)) +
   scale_fill_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c'))
-
-## wordcloud ##
-
-positive <- q1[q1$label == 'Positive',] # replace 'Positive' for negative/neutral tweets
-
-# remove non-ascii words
-positive$text <- stringi::stri_trans_general(positive$text, "latin-ascii")
-positive$text <- gsub("[^\x01-\x7F]", "", positive$text)
-
-# create corpus and preprocess data
-docs <- Corpus(VectorSource(positive$text))
-docs <- docs %>%
-  tm_map(removeNumbers) %>%
-  tm_map(removePunctuation) %>%
-  tm_map(stripWhitespace)
-docs <- tm_map(docs, content_transformer(tolower))
-docs <- tm_map(docs, removeWords, stopwords("english"))
-docs <- tm_map(docs, removeWords, c("russia", "ukraine", "user")) # remove "Russia" and "Ukraine"
-
-# create matrix
-dtm <- TermDocumentMatrix(docs) 
-matrix <- as.matrix(dtm) 
-words <- sort(rowSums(matrix),decreasing=TRUE) 
-df <- data.frame(word = names(words),freq=words)
-
-# create wordcloud
-set.seed(1234)
-wordcloud(words = df$word, freq = df$freq, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35, 
-          colors=brewer.pal(8, "Dark2"))
-
-# export dataframe to CSV
-write.csv(sentiment_by_month,'./UkraineConflictOnTwitter/SentimentAnalysis/data/q1/sentiment_by_month.csv', row.names = FALSE)
-write.csv(sentiment_by_week,'./UkraineConflictOnTwitter/SentimentAnalysis/data/q1/sentiment_by_week.csv', row.names = FALSE)
-
