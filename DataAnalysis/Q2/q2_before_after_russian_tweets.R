@@ -70,20 +70,20 @@ plot_barplot_before_after(q2_nato_russian, "Sentiment of russian tweets containi
 
 # English
 
-q2_zelensky_english <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/zelensky_english_with_sentiment.csv')
+q2_zelensky_english <-  read.csv('/Users/Bensas/ITBA/Intercambios/KAIST/Data\ Science\ Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q2/zelensky_english_with_sentiment.csv')
 conduct_chisq_before_after(q2_zelensky_english)
 plot_barplot_before_after(q2_zelensky_english, "Sentiment of english tweets containing \"Zelensky\"")
-# p-value for 1 week before/after = 7.735e-14 (significant)
+# p-value for 1 week before/after = 2.153e-11 (significant)
 
-q2_putin_english <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/putin_english_with_sentiment.csv')
+q2_putin_english <-  read.csv('/Users/Bensas/ITBA/Intercambios/KAIST/Data\ Science\ Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q2/putin_english_with_sentiment.csv')
 conduct_chisq_before_after(q2_putin_english)
 plot_barplot_before_after(q2_putin_english, "Sentiment of english tweets containing \"Putin\"")
-# p-value for 1 week before/after = 0.1959 (insignificant)
+# p-value for 1 week before/after = 0.01354 (significant)
 
-q2_nato_english <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/nato_english_with_sentiment.csv')
+q2_nato_english <-  read.csv('/Users/Bensas/ITBA/Intercambios/KAIST/Data\ Science\ Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q2/nato_english_with_sentiment.csv')
 conduct_chisq_before_after(q2_nato_english)
 plot_barplot_before_after(q2_nato_english, "Sentiment of english tweets containing \"NATO\"")
-# p-value for 1 week before/after = 0.1518 (insignificant)
+# p-value for 1 week before/after = 0.04421 (significant)
 
 
 

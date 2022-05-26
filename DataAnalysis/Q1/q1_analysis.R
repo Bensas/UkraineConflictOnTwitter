@@ -52,7 +52,7 @@ ggplot(sentiment_by_week, aes(fill=label, y=freq, x=Week)) +
   theme(axis.text.y = element_text(size=13)) +
   theme(legend.title = element_text(face='bold', size=15)) +
   theme(legend.text = element_text(size=15)) +
-  scale_x_continuous(breaks=c(1,11,16,23), labels=c("Dec 24th", "Feb 24th", "April 7th", "May 24th")) +
+  scale_x_continuous(breaks=c(1,4,11,16,23), labels=c("Dec 24th", "Jan 14th", "Feb 24th", "April 7th", "May 24th")) +
   scale_fill_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c'))
 
 # graph (by month)
