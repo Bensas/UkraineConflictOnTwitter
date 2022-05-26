@@ -12,7 +12,7 @@ split_before_after_date <- function(data, date) {
   data$Date <- sub(" .*", "", data$Date)
   data$Date <- as.Date(data$Date, format="%Y-%m-%d", tz="UTC")
   
-  data <- subset(data, Date >= as.Date('2022-02-25') & Date <= as.Date('2022-03-10'))
+  data <- subset(data, Date >= as.Date('2022-02-18') & Date <= as.Date('2022-03-17'))
   data
   
   # Tweets before and after twitter ban
@@ -29,10 +29,21 @@ conduct_chisq_before_after <- function(data) {
   after_ban = data.frame(result[2])
   
   # calculate frequency of label
-  info_matrix = create_freq_matrix_2_groups(before_ban, after_ban, "Before Twitter Ban", "After Twitter Ban")
+  info_matrix = create_count_matrix_2_groups(before_ban, after_ban, "Before Twitter Ban", "After Twitter Ban")
   print(info_matrix)
   
   chisq.test(info_matrix)
+}
+
+plot_barplot_before_after <- function(data, plot_title) {
+  result = split_before_after_date(data, as.Date('2022-03-04'))
+  before_ban = data.frame(result[1])
+  after_ban = data.frame(result[2])
+  
+  # calculate frequency of label
+  info_matrix = create_freq_matrix_2_groups(before_ban, after_ban, "Before Twitter Ban", "After Twitter Ban")
+  print(info_matrix)
+  barplot(info_matrix, main=plot_title, col = c('#d9534f', '#f0ad4e', '#5cb85c'))
 }
 
 # Russian
@@ -40,29 +51,39 @@ conduct_chisq_before_after <- function(data) {
 # csv file -- change the file path here
 q2_zelensky_russian <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/zelensky_russian_with_sentiment.csv')
 conduct_chisq_before_after(q2_zelensky_russian)
-# p-value = 0.4434 (insignificant)
+plot_barplot_before_after(q2_zelensky_russian, "Sentiment of russian tweets containing \"Zelensky\"")
+# p-value for 1 week before/after = 0.4434 (insignificant)
+# p-value for 2 weeks before/after = 0.0744 (insignificant)
+
 
 q2_putin_russian <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/putin_russian_with_sentiment.csv')
 conduct_chisq_before_after(q2_putin_russian)
-# p-value = 0.4486 (insignificant)
+plot_barplot_before_after(q2_putin_russian, "Sentiment of russian tweets containing \"Putin\"")
+# p-value for 1 week before/after = 0.4486 (insignificant)
+# p-value for 2 weeks before/after = 0.1378 (insignificant)
 
 q2_nato_russian <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/nato_russian_with_sentiment.csv')
 conduct_chisq_before_after(q2_nato_russian)
-# p-value = 0.05422 (insignificant)
+plot_barplot_before_after(q2_nato_russian, "Sentiment of russian tweets containing \"NATO\"")
+# p-value for 1 week before/after = 0.05422 (insignificant)
+# p-value for 2 weeks before/after = 0.00012 (significant)
 
 # English
 
 q2_zelensky_english <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/zelensky_english_with_sentiment.csv')
 conduct_chisq_before_after(q2_zelensky_english)
-# p-value = 7.735e-14 (significant)
+plot_barplot_before_after(q2_zelensky_english, "Sentiment of english tweets containing \"Zelensky\"")
+# p-value for 1 week before/after = 7.735e-14 (significant)
 
 q2_putin_english <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/putin_english_with_sentiment.csv')
 conduct_chisq_before_after(q2_putin_english)
-# p-value = p-value = 0.1959 (insignificant)
+plot_barplot_before_after(q2_putin_english, "Sentiment of english tweets containing \"Putin\"")
+# p-value for 1 week before/after = 0.1959 (insignificant)
 
 q2_nato_english <-  read.csv('UkraineConflictOnTwitter/SentimentAnalysis/data/q2/nato_english_with_sentiment.csv')
 conduct_chisq_before_after(q2_nato_english)
-# p-value = 0.1518 (insignificant)
+plot_barplot_before_after(q2_nato_english, "Sentiment of english tweets containing \"NATO\"")
+# p-value for 1 week before/after = 0.1518 (insignificant)
 
 
 
