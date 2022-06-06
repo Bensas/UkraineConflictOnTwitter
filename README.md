@@ -11,7 +11,7 @@ Analysis of twitter data to track the sentiment of different groups in regards t
 ### Running
 To execute the default code, simply stand on the main directory and run:
 ```
-  cd TwitterAPI
+  cd DataCollection/TwitterAPI
   bash run.sh
 ```
 
@@ -23,7 +23,7 @@ To execute the default code, simply stand on the main directory and run:
 
 - You must have the `pytorch` library installed. Can be installed running `pip install -q torch`
 
-### Running
+### Running [DEPRECATED]
 
 To execute the default code, simply stand on the main directory and run:
 ```
