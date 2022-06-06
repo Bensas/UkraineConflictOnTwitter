@@ -23,7 +23,7 @@ To execute the default code, simply stand on the main directory and run:
 
 - You must have the `pytorch` library installed. Can be installed running `pip install -q torch`
 
-### Running
+### Running [DEPRECATED]
 
 To execute the default code, simply stand on the main directory and run:
 ```
