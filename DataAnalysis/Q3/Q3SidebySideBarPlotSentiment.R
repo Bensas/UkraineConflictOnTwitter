@@ -135,6 +135,7 @@ ggplot(allSent, aes(x=Sentiment, y=Percentage, fill=Source)) +
   scale_fill_manual(values=c("#fc4949", "#1a94eb"))
 
 ###############################################################################
+#X-squared = 0.35763, df = 2, p-value = 0.8363
 
 
 

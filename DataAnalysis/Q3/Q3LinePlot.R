@@ -5,9 +5,9 @@ p_load(plotly)
 # csv file -- change the file path here
 #foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/foxalltweets_with_sentiment.csv")
 #nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytalltweets_with_sentiment.csv")
-#foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/foxtitle_with_sentiment.csv")
-nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytitle_with_sentiment.csv")
-q1 <- nytitle
+foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/foxtitle_with_sentiment.csv")
+#nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytitle_with_sentiment.csv")
+q1 <- foxtitle
 
 #filter tweets that starts with @
 #q1 <- q1 %>%  filter(!grepl("^@", q1$text))
@@ -46,17 +46,17 @@ p <- ggplot(sentiment_by_week, aes(fill=label, y=freq, x=Week, col=label)) +
   geom_line(lwd=1.5) +
   theme_minimal() + 
   theme(panel.background = element_blank()) +
-  ggtitle("NYTimes Average Sentiment of Tweets by Week") +
+  ggtitle("Fox News Avg Sentiment of Tweets by Week") +
   labs(x='Week', y='Frequency') +
   theme(plot.title = element_text(hjust = 0.5, size=15, face='bold', margin = margin(t = 10, r = 0 , b = 10, l = 0))) +
   theme(axis.title.x = element_text(face='bold', size=10, margin = margin(t = 10, b = 10, r = 0, l = 0))) +
   theme(axis.title.y = element_text(face='bold', size=10, margin = margin(t = 0, b = 0, r = 10, l = 10))) +
   theme(axis.text.x = element_text(angle=30, size=10)) +
   theme(axis.text.y = element_text(size=10)) +
-  theme(legend.title = element_text(face='bold', size=10)) +
+  theme(legend.title = element_text(face='bold', size=8)) +
   theme(legend.text = element_text(size=8)) +
-  scale_x_continuous(breaks=c(1,11,16,23), labels=c("Dec 24th", "Feb 24th", "April 7th", "May 24th"))
-#scale_color_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c', '#5cb86c', '#5cb87c', '#5cb88c', '#5cb89c'))
+  scale_x_continuous(breaks=c(1,9,16,23), labels=c("Dec 24th", "Feb 24th", "April 15th", "May 24th")) +
+  scale_color_manual('label', values=c('#d9534f', '#f0ad4e', '#5cb85c', '#5cb86c', '#5cb87c', '#5cb88c', '#5cb89c'))
 ggplotly(p)
 
 
