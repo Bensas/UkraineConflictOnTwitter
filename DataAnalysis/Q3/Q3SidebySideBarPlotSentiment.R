@@ -20,6 +20,9 @@ foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Met
 nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytitle_with_sentiment.csv")
 #######3#preprocess everything
 
+#filter for only the audience
+foxnews <- foxnews %>% filter(grepl("^@", foxnews$text))
+nytimes <- nytimes %>% filter(grepl("^@", nytimes$text))
 
 nytimes <- nytimes %>% select(Date, text, label, score)
 nytimes$Date <- sub(" .*", "", nytimes$Date) %>% as.Date(format="%Y-%m-%d", tz="UTC")

@@ -38,7 +38,7 @@ make_cloud <- function(dataset, sentiment){
   set.seed(1234)
   wc <- wordcloud(words = df$word, freq = df$freq, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35, 
             colors=brewer.pal(8, "Dark2"))
-  return(wc)
+  return(df)
 
 }
 

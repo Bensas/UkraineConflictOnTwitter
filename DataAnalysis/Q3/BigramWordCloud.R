@@ -12,10 +12,10 @@ p_load(wordcloud)
 p_load(tm)
 
 ####Loading all the data
-#foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/foxalltweets_with_sentiment.csv")
-#nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytalltweets_with_sentiment.csv")
+foxnews <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/foxalltweets_with_sentiment.csv")
+nytimes <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytalltweets_with_sentiment.csv")
 foxtitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/foxtitle_with_sentiment.csv")
-#nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytitle_with_sentiment.csv")
+nytitle <- read.csv("/Volumes/GoogleDrive/My Drive/Spring 2022/Data Science Methodology/UkraineConflictOnTwitter/SentimentAnalysis/data/q3/May30Scrap/nytitle_with_sentiment.csv")
 
 foxnews <- foxnews %>% filter(grepl("^@", foxnews$text))
 nytimes <- nytimes %>% filter(grepl("^@", nytimes$text))
@@ -30,7 +30,7 @@ bigram_wc <- function(foxnews){
   bg_fox <- fox_unn %>% 
     separate(word, c("word1", "word2"), sep=" ")
   
-  avoid_list <- c("russia", "ukraine", "user", "http", "fox", "york", "news", "tucker")
+  avoid_list <- c("russia", "ukraine", "user", "http", "fox", "york", "news")
   filter_bg_fox <- bg_fox %>% 
     filter(!word1 %in% stop_words$word) %>% 
     filter(!word2 %in% stop_words$word) %>% 
@@ -47,7 +47,7 @@ bigram_wc <- function(foxnews){
   wc <- wordcloud(words = count_bg$bigram, freq = count_bg$n, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35, 
                   colors=brewer.pal(8, "Dark2"))
   
-  return(wc)
+  return(count_bg)
 }
 
 fox_pos <- foxnews %>% filter(label=="Positive")
